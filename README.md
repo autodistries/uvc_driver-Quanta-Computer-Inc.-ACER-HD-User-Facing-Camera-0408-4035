@@ -11,9 +11,21 @@ The script will **build for 6.6.2 kernel by default**, you can edit the pkgver a
 
 As long as your admin password is not asked, no modification is made to your system.
 At the end of the execution, **the module is compressed** before being copied. I am not sure if every gnu/linux flavor likes compressed drivers. If not, you will have to copy the newly-built driver manually (it is not hard)
+# Will it work for my camera ?
+Maybe.  Run `lsusb` in your terminal. If you find something similar to ```Bus 003 Device 002: ID 0408:4035 Quanta Computer, Inc. ACER HD User Facing``` it might work.
+If the ID XXXX:XXXX is different, you will have to edit the script to reflect YOUR camera. 
+Replace this with your numerical values:
+```
++     .idVendor     = 0x0408, #put whatever's the first part of your ID here, do not remove the 0x
++     .idProduct        = 0x4035, # same for the 2nd value
+```
 
 
+# Goal
+Expected result is a working camera.
 
+
+# Sources
 Here are my sources and pages that reference issues for these types of cameras: 
 - https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2000947 (not active)
 - https://github.com/Giuliano69/uvc_driver-for-Quanta-HD-User-Facing-0x0408-0x4035- (Ubuntu 22-04 only, out of date because not a patch)
@@ -21,3 +33,5 @@ Here are my sources and pages that reference issues for these types of cameras:
 - https://patchwork.kernel.org/project/linux-media/patch/20230115205210.20077-1-laurent.pinchart@ideasonboard.com/#25163877 (Archived, probably unsolved)
 
 I hope one day we will get in-kernel support
+
+
